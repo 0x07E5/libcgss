@@ -109,6 +109,7 @@ CGSS_NS_BEGIN
     void CHcaFormatReader::Initialize() {
         auto stream = _baseStream;
         auto &hcaInfo = _hcaInfo;
+        hcaInfo.random = 1;
         uint32_t bufferSize;
         uint32_t actualRead;
 
@@ -310,7 +311,7 @@ CGSS_NS_BEGIN
         if (!hcaInfo.compR03) {
             hcaInfo.compR03 = 1;
         }
-        if (!(hcaInfo.compR01 == 1 && hcaInfo.compR02 == 0xf)) {
+        if (!((hcaInfo.compR01 == 0 || hcaInfo.compR01 == 1) && hcaInfo.compR02 == 0xf)) {
             throw CFormatException("Compression/Decode: r-fields are out of range.");
         }
         hcaInfo.compR09 = ceil2(hcaInfo.compR05 - (hcaInfo.compR06 + hcaInfo.compR07), hcaInfo.compR08);
