@@ -1,13 +1,11 @@
 version: '0.2.1.{build}'
 image:
-  - Visual Studio 2015
   - Visual Studio 2017
 configuration:
   - Release
 environment:
   matrix:
     - arch: Win64
-    - arch: Win32
 matrix:
   fast_finish: true
 before_build:
